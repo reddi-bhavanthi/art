@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites</title>
+    <link rel="stylesheet" href="./css/modernart.css">
+    <link rel="stylesheet" href="./css/api.css">
+
+    <style>
+        #favorites {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 16px;
+            margin: 5%;
+        }
+
+        .favorite-image {
+            display: flex;
+            justify-content: space-between;
+            width: 250px;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .favorite-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .active a {
+            background-color: black;
+            color: red;
+            box-sizing: border-box;
+        }
+
+        .addToFav {
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logoTitle">
+            <div class="logo">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-gallery-44-267592.png" alt="logo">
+            </div>
+            <div class="title">
+                ARTIFY
+            </div>
+        </div>
+        <ul class="nav2">
+            <li class="">
+                <a href="index.html">HOME</a>
+            </li>
+            <li class="">
+                <a href="modernArt.html">MODERN ART</a>
+            </li>
+            <li class="">
+                <a href="ancientArt.html">ANCIENT ART</a>
+            </li>
+            <li class="">
+                <a href="sculpture.html">SCULPTURES</a>
+            </li>
+           
+            <li class="active">
+                <a href="favourite.html">❤️</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="title">
+        <h1>Favourites</h1>
+    </div>
+    <div class="addToFav">Double Click on pictures to Add them here !</div>
+    <div id="favorites"></div>
+
+    <script>
+        const favoritesElement = document.getElementById('favorites');
+        const likedImages = JSON.parse(localStorage.getItem('likedImages')) || [];
+
+        // Display liked images in the favorites section
+        likedImages.forEach(image => {
+            const favoriteImageContainer = document.createElement('div');
+            favoriteImageContainer.classList.add('favorite-image');
+
+            const favoriteImg = document.createElement('img');
+            favoriteImg.src = image.urls.small;
+            favoriteImg.alt = image.alt_description;
+
+            favoriteImageContainer.appendChild(favoriteImg);
+            favoritesElement.appendChild(favoriteImageContainer);
+        });
+    </script>
+
+</body>
+
+</html>
